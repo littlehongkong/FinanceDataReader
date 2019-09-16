@@ -8,8 +8,8 @@ class NasdaqStockListing:
         self.market = market
         
     def read(self):
-        url = 'http://www.nasdaq.com/screening/companies-by-name.aspx?' \
-                'letter=0&render=download&exchange=' + self.market.lower()
+        url = 'https://old.nasdaq.com/screening/companies-by-name.aspx?' \
+                '&exchange={exchange}&render=download'.format(exchange=self.market.upper())
         df = pd.read_csv(url)
         df['MarketCap'] = df['MarketCap'].fillna('')
         df['MarketCap'] = df['MarketCap'].apply(_convert_letter_to_num)
